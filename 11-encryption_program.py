@@ -1,43 +1,36 @@
-# Gerekli kütüphaneleri içe aktar
-import random     # Rastgele karıştırma (shuffle) işlemi için kullanılır
-import string     # Harf, sayı ve özel karakterleri almak için kullanılır
+# Gerekli modülleri içe aktarıyoruz
+import random     # Rastgele seçimler yapmak için
+import string     # Hazır karakter kümeleri (harfler, rakamlar, semboller) için
 
-# Şifreleme işleminde kullanılacak tüm karakterleri birleştiriyoruz:
-# string.punctuation -> !, ?, %, vb.
-# string.digits -> 0-9
-# string.ascii_letters -> a-z ve A-Z
-# Başına bir boşluk (" ") da ekliyoruz çünkü boşluk karakteri de mesajda olabilir
-chars = " " + string.punctuation + string.digits + string.ascii_letters
+# Kullanıcıdan şifre uzunluğunu alıyoruz
+length = int(input("Şifre uzunluğu kaç karakter olsun? "))
 
-# Bu karakterleri listeye çeviriyoruz (her karakter ayrı eleman olacak şekilde)
-chars = list(chars)
+# Kullanıcıya hangi karakter türlerini kullanmak istediğini soruyoruz
+use_letters = input("Harf kullanılsın mı? (e/h): ").lower()  # ascii_letters (küçük ve büyük harfler)
+use_digits = input("Rakam kullanılsın mı? (e/h): ").lower()   # 0-9 rakamlar
+use_symbols = input("Sembol kullanılsın mı? (e/h): ").lower() # !@#$ vs gibi özel karakterler
 
-# Aynı karakterlerden oluşan bir kopya oluşturuyoruz.
-# Bu kopyayı karıştırarak bir "şifreleme anahtarı (key)" elde edeceğiz
-key = chars.copy()
+# Boş bir karakter havuzu oluşturuyoruz
+allowed_chars = ""
 
-# Anahtar listesini rastgele karıştırıyoruz.
-# Böylece her karakterin yerine başka rastgele bir karakter gelecek
-random.shuffle(key)
+# Kullanıcının seçtiği türlere göre karakter havuzumuzu oluşturuyoruz
+if use_letters == "e":
+    allowed_chars += string.ascii_letters  # abc...ABC...
+if use_digits == "e":
+    allowed_chars += string.digits         # 0123456789
+if use_symbols == "e":
+    allowed_chars += string.punctuation    # !"#$%&'()*+,-./:;<=>?@[]^_`{|}~
 
-# Hem orijinal karakterleri hem de şifreleme anahtarını yazdırıyoruz (kontrol amaçlı)
-print(f"chars: {chars}")  # Orijinal karakterler
-print(f"key: {key}")      # Şifrelenmiş karakter eşleşmeleri
+# Eğer kullanıcı hiçbir şeyi seçmediyse uyarı verip çıkış yapıyoruz
+if allowed_chars == "":
+    print("Hiçbir karakter türü seçilmedi. Şifre oluşturulamıyor.")
+else:
+    # Şifreyi tutacağımız boş bir string tanımlıyoruz
+    password = ""
 
-# Kullanıcıdan şifrelenecek bir mesaj alıyoruz
-plain_text = input("Enter a message to encrypt: ")
+    # Kullanıcının istediği uzunluk kadar rastgele karakter seçip şifreye ekliyoruz
+    for i in range(length):
+        password += random.choice(allowed_chars)
 
-# Şifrelenmiş (gizlenmiş) mesajı tutmak için boş bir string oluşturuyoruz
-cipher_text = ""
-
-# Mesajdaki her harfi tek tek ele alıyoruz
-for letter in plain_text:
-    # Harfin orijinal listedeki (chars) indeksini bul
-    index = chars.index(letter)
-
-    # Aynı index'teki karıştırılmış karakteri (key[index]) al ve cipher_text'e ekle
-    cipher_text += key[index]
-
-# Sonuçları ekrana yazdırıyoruz
-print(f"Original message: {plain_text}")        # Kullanıcının girdiği orijinal mesaj
-print(f"Encrypted message: {cipher_text}")      # Şifrelenmiş hali
+    # Sonuç olarak oluşturulan şifreyi kullanıcıya gösteriyoruz
+    print("Oluşturulan şifre:", password)
