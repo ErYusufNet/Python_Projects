@@ -1,36 +1,30 @@
-# Gerekli modülleri içe aktarıyoruz
-import random     # Rastgele seçimler yapmak için
-import string     # Hazır karakter kümeleri (harfler, rakamlar, semboller) için
+import random
+import string
 
-# Kullanıcıdan şifre uzunluğunu alıyoruz
-length = int(input("Şifre uzunluğu kaç karakter olsun? "))
+chars = " " + string.punctuation + string.digits + string.ascii_letters
+chars = list(chars)
+key = chars.copy()
 
-# Kullanıcıya hangi karakter türlerini kullanmak istediğini soruyoruz
-use_letters = input("Harf kullanılsın mı? (e/h): ").lower()  # ascii_letters (küçük ve büyük harfler)
-use_digits = input("Rakam kullanılsın mı? (e/h): ").lower()   # 0-9 rakamlar
-use_symbols = input("Sembol kullanılsın mı? (e/h): ").lower() # !@#$ vs gibi özel karakterler
+random.shuffle(key)
 
-# Boş bir karakter havuzu oluşturuyoruz
-allowed_chars = ""
+#ENCRYPT
+plain_text = input("Enter a message to encrypt: ")
+cipher_text = ""
 
-# Kullanıcının seçtiği türlere göre karakter havuzumuzu oluşturuyoruz
-if use_letters == "e":
-    allowed_chars += string.ascii_letters  # abc...ABC...
-if use_digits == "e":
-    allowed_chars += string.digits         # 0123456789
-if use_symbols == "e":
-    allowed_chars += string.punctuation    # !"#$%&'()*+,-./:;<=>?@[]^_`{|}~
+for letter in plain_text:
+    index = chars.index(letter)
+    cipher_text += key[index]
 
-# Eğer kullanıcı hiçbir şeyi seçmediyse uyarı verip çıkış yapıyoruz
-if allowed_chars == "":
-    print("Hiçbir karakter türü seçilmedi. Şifre oluşturulamıyor.")
-else:
-    # Şifreyi tutacağımız boş bir string tanımlıyoruz
-    password = ""
+print(f"original message : {plain_text}")
+print(f"encrypted message: {cipher_text}")
 
-    # Kullanıcının istediği uzunluk kadar rastgele karakter seçip şifreye ekliyoruz
-    for i in range(length):
-        password += random.choice(allowed_chars)
+#DECRYPT
+cipher_text = input("Enter a message to encrypt: ")
+plain_text = ""
 
-    # Sonuç olarak oluşturulan şifreyi kullanıcıya gösteriyoruz
-    print("Oluşturulan şifre:", password)
+for letter in cipher_text:
+    index = key.index(letter)
+    plain_text += chars[index]
+
+print(f"encrypted message: {cipher_text}")
+print(f"original message : {plain_text}")
