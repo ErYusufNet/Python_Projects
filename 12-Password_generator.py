@@ -1,31 +1,36 @@
-import random
-import string
+# Gerekli modülleri içe aktarıyoruz
+import random     # Rastgele seçimler yapmak için
+import string     # Hazır karakter kümeleri (harfler, rakamlar, semboller) için
 
-def generate_password(min_Length, numbers=True, special_chars=True):
-    letters = string.ascii_letters
-    digits = string.digits
-    special = string.punctuation
-    print(letters, digits, special)
-    characters = letters
-    if numbers:
-        characters += digits
-    if special_chars:
-        characters += special
-    pwd = ""
-    meets_criteria = False
-    has_number = False
-    has_special = False
-    while not meets_criteria or len(pwd) < min_Length:
-        new_char = random.choice(characters)
-        pwd += new_char
-        if new_char in digits:
-            has_number = True
-        elif new_char in special:
-            has_special = True
-        meets_criteria = True
-        if numbers:
-            meets_criteria = has_number
-        if special_chars:
-            meets_criteria = meets_criteria and has_special
+# Kullanıcıdan şifre uzunluğunu alıyoruz
+length = int(input("Şifre uzunluğu kaç karakter olsun? "))
 
-generate_password(10)
+# Kullanıcıya hangi karakter türlerini kullanmak istediğini soruyoruz
+use_letters = input("Harf kullanılsın mı? (e/h): ").lower()  # ascii_letters (küçük ve büyük harfler)
+use_digits = input("Rakam kullanılsın mı? (e/h): ").lower()   # 0-9 rakamlar
+use_symbols = input("Sembol kullanılsın mı? (e/h): ").lower() # !@#$ vs gibi özel karakterler
+
+# Boş bir karakter havuzu oluşturuyoruz
+allowed_chars = ""
+
+# Kullanıcının seçtiği türlere göre karakter havuzumuzu oluşturuyoruz
+if use_letters == "e":
+    allowed_chars += string.ascii_letters  # abc...ABC...
+if use_digits == "e":
+    allowed_chars += string.digits         # 0123456789
+if use_symbols == "e":
+    allowed_chars += string.punctuation    # !"#$%&'()*+,-./:;<=>?@[]^_`{|}~
+
+# Eğer kullanıcı hiçbir şeyi seçmediyse uyarı verip çıkış yapıyoruz
+if allowed_chars == "":
+    print("Hiçbir karakter türü seçilmedi. Şifre oluşturulamıyor.")
+else:
+    # Şifreyi tutacağımız boş bir string tanımlıyoruz
+    password = ""
+
+    # Kullanıcının istediği uzunluk kadar rastgele karakter seçip şifreye ekliyoruz
+    for i in range(length):
+        password += random.choice(allowed_chars)
+
+    # Sonuç olarak oluşturulan şifreyi kullanıcıya gösteriyoruz
+    print("Oluşturulan şifre:", password)
