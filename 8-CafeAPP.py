@@ -1,3 +1,4 @@
+
 # Menüdeki ürünleri ve fiyatlarını saklayan sözlük (dictionary)
 menu = {
     "coffee": 2.50,

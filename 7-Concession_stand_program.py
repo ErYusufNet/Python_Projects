@@ -1,3 +1,4 @@
+
 # Menü isimli bir sözlük (dictionary) oluşturuluyor.
 # Bu sözlükte her bir yiyecek ismi anahtar (key) olarak,
 # fiyatı ise değer (value) olarak tanımlanmıştır.
