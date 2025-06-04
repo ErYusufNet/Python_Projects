@@ -1,3 +1,4 @@
+
 # Mevcut bakiyeyi ekrana yazdırır
 def show_balance(balance):
     print(f"Your balance is €{balance:.2f}")
