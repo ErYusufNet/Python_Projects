@@ -1,4 +1,5 @@
 
+
 # Gerekli modülleri içe aktarıyoruz
 import random     # Rastgele seçimler yapmak için
 import string     # Hazır karakter kümeleri (harfler, rakamlar, semboller) için
