@@ -1,4 +1,5 @@
 
+
 # Rastgele seçimler yapabilmek için 'random' modülü içe aktarılır.
 import random
 
