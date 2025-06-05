@@ -1,6 +1,7 @@
 
 
 
+
 def sum_of_squares(number1, number2):
     square = number1 ** 2
     square2 = number2 ** 2
