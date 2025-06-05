@@ -1,4 +1,5 @@
 
+
 # Python'daki 'random' kütüphanesi, rastgele (random) sayılar üretmek için kullanılır.
 import random
 
