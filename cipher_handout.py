@@ -10,6 +10,7 @@ def encrypt(text: str, shift: int) -> str:
     return result
 
 
+
 def decrypt(text: str, shift: int) -> str:
     result = ""
     for char in text:
