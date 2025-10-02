@@ -9,6 +9,10 @@ def sum_of_squares(number1, number2):
     return sum_of_squares
 
 
+
+
+
+
 def caps_lock(input_string):
     block_letter_string = ''
     for char in input_string:
