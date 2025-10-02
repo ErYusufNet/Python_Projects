@@ -3,6 +3,7 @@
 # Python'daki 'random' kütüphanesi, rastgele (random) sayılar üretmek için kullanılır.
 import random
 
+
 # Tahmin edilecek sayının alınabileceği en küçük değer
 lowest_num = 1
 
