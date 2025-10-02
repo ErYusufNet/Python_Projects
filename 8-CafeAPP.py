@@ -11,6 +11,7 @@ menu = {
 # Kullanıcının siparişlerini tutmak için boş bir sözlük (ürün: adet)
 cart = {}
 
+
 # Menü başlığını yazdır
 print("----- MENU -----")
 for item, price in menu.items():
