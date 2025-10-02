@@ -11,6 +11,7 @@ def encrypt(text: str, shift: int) -> str:
 
 
 
+
 def decrypt(text: str, shift: int) -> str:
     result = ""
     for char in text:
